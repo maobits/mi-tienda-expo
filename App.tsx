@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { ThemeProvider } from "./src/estilo/ThemeContext";
+import PantallaAutenticacion from "./src/vitrinas/autenticacion/PantallaAutenticacion";
+import * as Font from "expo-font";
+import AppLoading from "expo-app-loading";
+import { useState } from "react";
 
 export default function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  const cargarFuentes = async () => {
+    await Font.loadAsync({
+      Raleway: require("./assets/fonts/Raleway-Bold.ttf"),
+      Inter: require("./assets/fonts/Inter-Regular.ttf"),
+    });
+  };
+
+  if (!fontsLoaded) {
+    return (
+      <AppLoading
+        startAsync={cargarFuentes}
+        onFinish={() => setFontsLoaded(true)}
+        onError={console.warn}
+      />
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <PantallaAutenticacion />
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
