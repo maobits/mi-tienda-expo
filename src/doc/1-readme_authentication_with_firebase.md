@@ -9,8 +9,8 @@
 **Descripción:** Inicia el proyecto limpio con la plantilla en blanco.
 
 ```bash
-npx create-expo-app mitienda-auth --template blank
-cd mitienda-auth
+npx create-expo-app mi-tienda -t blank-typescript
+cd mi-tienda
 ```
 
 ---
